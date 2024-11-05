@@ -12,6 +12,25 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import os
+from celery import Celery
+
+# Djangoの設定モジュールを環境変数から取得
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'people_count.settings')
+
+# Celeryインスタンスを作成
+app = Celery('people_count')
+
+# Djangoの設定をCeleryに読み込む
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# タスクモジュールを自動検出
+app.autodiscover_tasks()
+
+# Celeryの結果バックエンドをデータベースに設定
+CELERY_RESULT_BACKEND = 'django-db'  # または 'db+sqlite:///db.sqlite3' とすることもできます
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'count'
+    'count',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
