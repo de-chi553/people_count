@@ -3,7 +3,8 @@ from .models import PeopleCounter
 from django.shortcuts import redirect
 
 def redirect_to_get_count(request):
-    return redirect('get_count')  # 名前付きURLを使って`/counter/get-count/` へリダイレクト
+    return redirect('/counter/get-count/')  # 明示的なパスでリダイレクト
+
 
 
 def UpdateCountView(request, current_count):
