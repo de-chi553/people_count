@@ -1,11 +1,5 @@
 from django.http import JsonResponse
 from .models import PeopleCounter
-from django.shortcuts import redirect
-
-def redirect_to_get_count(request):
-    return redirect('/counter/get-count/')  # 明示的なパスでリダイレクト
-
-
 
 def UpdateCountView(request, current_count):
     PeopleCounter.objects.update_or_create(id=1, defaults={'count': current_count})
