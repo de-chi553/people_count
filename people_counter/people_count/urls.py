@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from count.views import UpdateCountView, GetCountView
+from count.views import UpdateCountView, GetCountView, reset_count_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('counter/update-count/<int:current_count>/', UpdateCountView, name='update_count'),
     path('counter/get-count/', GetCountView, name='get_count'),  # 人数取得用のURL
+    path('counter/reset-count/', reset_count_view, name='reset_count'),  # リセット用エンドポイント
 ]

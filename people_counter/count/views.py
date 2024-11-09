@@ -13,3 +13,7 @@ def GetCountView(request):
     except PeopleCounter.DoesNotExist:
         count = 0
     return JsonResponse({'current_count': count})
+
+def reset_count_view(request):
+    PeopleCounter.objects.update_or_create(id=1, defaults={'count': 0})
+    return JsonResponse({'status': 'success', 'count': 0})
