@@ -29,7 +29,7 @@ person_passed = False
 
 # 店内の人数をDjango APIに保存する関数
 def update_people_count_in_django(current_count):
-    url = f"http://localhost:8000/counter/update-count/{current_count}/"
+    url = f"https://people-count-ngyx.onrender.com/counter/update-count/{current_count}/"
     try:
         response = requests.get(url)
         if response.status_code == 200:
